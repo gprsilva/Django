@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Especialidades{% endblock %}
+
+{% block conteudo %}
+{% for especialidade in especialidades %}
+<div id="card-esp">
+    <p>Nome: {{ especialidade.nome }}</p>
+    <p>Descrição: {{ especialidade.descricao }}</p>
+    <button><a href="">Editar</a></button>
+    <button>Excluir</button>
+</div>
+{% endfor %}
+{% endblock %}

@@ -3,6 +3,14 @@ from django.shortcuts import render
 from .models import Especialidade, Medico
 from .forms import AddEspecialidade, AddMedico
 
+def mostrarMedico(request):
+    medico_list = Medico.objects.all()
+    return render(request, 'medico.html',{'medicos': medico_list})
+
+def mostrarEspecialidade(request):
+    esp_list = Especialidade.objects.all()
+    return render(request, 'especialidade.html',{'especialidades': esp_list})
+
 def addEspecialidade(request):
     """ This function is called to add one contact member to your contact list in your Database """
     if request.method == 'POST':
