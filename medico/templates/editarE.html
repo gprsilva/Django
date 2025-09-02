@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Adicionar Especialidade{% endblock %}
+
+{% block conteudo %}
+
+  <div class="container-add">
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xs-offset-3">
+        		
+          <form  method="POST">
+            
+              {% csrf_token %}
+              
+              <div class="form-group">
+                  <label class="form-label">Nome</label>
+                  <input type="text" class="form-control" id="name" name="name" placeholder="Name" tabindex="1" value="{{especialidade.nome}}" required >
+              </div>
+              <div class="form-group">
+                  <label class="form-label">Descrição</label>
+                  <input type="text" class="form-control" id="relation" name="descricao" placeholder="Descrição" tabindex="2" value="{{especialidade.descricao}}" required>
+              </div>
+                       
+              
+              <div class="text-center">
+                  <button type="submit" class="btn">Confirmar</button>
+              </div>
+          </form>
+          
+      </div>
+  </div>
+
+{% endblock conteudo %}

@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('add/', views.addEspecialidade),
     path('medico/',views.mostrarMedico, name= "tela-med"),
-    path('especialidade/', views.mostrarEspecialidade, name= "tela-esp")
+    path('especialidade/', views.mostrarEspecialidade, name= "tela-esp"),
+    path('editar-esp/<int:especialidade_id>/', views.editarE),
 ]
