@@ -11,8 +11,8 @@
         
         <h2>{% block title %}{% endblock %}</h2>
         <div id="button-nav">
-            <button><a href="{% url "tela-med" %}">Médicos</a></button>
-            <button><a href="{% url "tela-esp" %}">Especialidades</a></button>
+            <button><a href="{% url 'medico_list' %}">Médicos</a></button>
+            <button><a href="{% url 'especialidade_list' %}">Especialidades</a></button>
         </div>
 
     </div>

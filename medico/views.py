@@ -1,78 +1,47 @@
-
-from django.shortcuts import render, get_object_or_404,redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 from .models import Especialidade, Medico
-from .forms import AddEspecialidade, AddMedico
+from .forms import EspecialidadeForm, MedicoForm
 
-def mostrarMedico(request):
-    medico_list = Medico.objects.all()
-    return render(request, 'medico.html',{'medicos': medico_list})
+class EspecialidadeListView(ListView):
+    model = Especialidade
+    template_name = 'especialidade_list.html'
 
-def mostrarEspecialidade(request):
-    esp_list = Especialidade.objects.all()
-    return render(request, 'especialidade.html',{'especialidades': esp_list})
+class EspecialidadeCreateView(CreateView):
+    model = Especialidade
+    form_class = EspecialidadeForm
+    template_name = 'especialidade_form.html'
+    success_url = reverse_lazy('especialidade_list')
 
-def addEspecialidade(request):
-    """ This function is called to add one contact member to your contact list in your Database """
-    if request.method == 'POST':
-        
-        django_form = AddEspecialidade(request.POST)
-        if django_form.is_valid():
-           
-            
-            new_member_nome = django_form.data.get("nome")
-            new_member_descricao = django_form.data.get("descricao")
-            
-            Especialidade.objects.create(
-                nome =  new_member_nome, 
-                descricao = new_member_descricao,
-                )
-            
-def editarE(request, especialidade_id):
-    especialidade = get_object_or_404(Especialidade, id=especialidade_id) # tenta buscar o usuário pelo ID (id=contact_id), se não encontrar esse usuário, retorna na tela o erro 404.
+class EspecialidadeUpdateView(UpdateView):
+    model = Especialidade
+    form_class = EspecialidadeForm
+    template_name = 'especialidade_form.html'
+    success_url = reverse_lazy('especialidade_list')
 
-    if request.method == 'POST':
+class EspecialidadeDeleteView(DeleteView):
+    model = Especialidade
+    template_name = 'especialidade_confirm_delete.html'
+    success_url = reverse_lazy('especialidade_list')
 
-        # popula o form com POST + instância existente
-        especialidade.nome = request.POST.get('name')
-        especialidade.descricao = request.POST.get('descricao')
-        especialidade.save()
+class MedicoListView(ListView):
+    model = Medico
+    template_name = 'medico_list.html'
 
-        # após salvar, redireciona ou renderiza a lista
-        especialidade_list = Especialidade.objects.all()
+class MedicoCreateView(CreateView):
+    model = Medico
+    form_class = MedicoForm
+    template_name = 'medico_form.html'
+    success_url = reverse_lazy('medico_list')
 
-        return redirect("especialidade")
+class MedicoUpdateView(UpdateView):
+    model = Medico
+    form_class = MedicoForm
+    template_name = 'medico_form.html'
+    success_url = reverse_lazy('medico_list')
 
-    else:
-        # se for GET, renderiza o template de edição passando o contact
-        return render(request, 'editarE.html', {'especialidade': especialidade})
-    
-def excluirE(request, especialidade_id):
-    especialidade = get_object_or_404(Especialidade, id=especialidade_id)
-    especialidade.delete()
-    return redirect("tela-esp")
-                 
-    
-def addMedico(request):
-    if request.method == 'POST':
-        
-        django_form = AddMedico(request.POST)
-        if django_form.is_valid():
-           
-            
-            new_member_nome = django_form.data.get("nome")
-            new_member_endereco = django_form.data.get("endereco")
-            new_member_telefone = django_form.data.get("telefone")
-            new_member_email = django_form.data.get("email")
-            new_member_data_nasc = django_form.data.get("data_nasc")
-            new_member_crm = django_form.data.get("crm")
-            new_member_especialidade = django_form.data.get("especialidade")
-            
-            Medico.objects.create(
-                nome =  new_member_nome,
-                endereco = new_member_endereco,
-                telefone = new_member_telefone,
-                email = new_member_email,
-                dataNasc = new_member_data_nasc,
-                crm = new_member_crm,
-                especialidade = new_member_especialidade
-                )
+class MedicoDeleteView(DeleteView):
+    model = Medico
+    template_name = 'medico_confirm_delete.html'
+    success_url = reverse_lazy('medico_list')

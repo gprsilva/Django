@@ -1,12 +1,12 @@
 from django import forms
 from .models import Especialidade, Medico
 
-class AddEspecialidade(forms.Form):
+class EspecialidadeForm(forms.ModelForm):
     class Meta:
         model = Especialidade
-        fields =('nome', 'descricao')
+        fields = ['nome', 'descricao']
 
-class AddMedico(forms.Form):
+class MedicoForm(forms.ModelForm):
     class Meta:
         model = Medico
-        fields = ('nome', 'endereco', 'telefone', 'email', 'data_nasc', 'crm', 'especialidade')
+        fields = ['nome', 'endereco', 'telefone', 'email', 'data_nascimento', 'crm']

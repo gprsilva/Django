@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Especialidades{% endblock %}
+
+{% block conteudo %}
+<h3>Lista de Especialidades</h3>
+
+<a href="{% url 'especialidade_create' %}"><button>Nova Especialidade</button></a>
+
+<table border="1" cellpadding="8">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for especialidade in object_list %}
+        <tr>
+            <td>{{ especialidade.id }}</td>
+            <td>{{ especialidade.nome }}</td>
+            <td>
+                <a href="{% url 'especialidade_update' especialidade.id_especialidade %}">Editar</a>
+                <a href="{% url 'especialidade_delete' especialidade.id_especialidade %}">Excluir</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">Nenhuma especialidade cadastrada.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

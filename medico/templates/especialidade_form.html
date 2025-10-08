@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Cadastrar/Editar Especialidade{% endblock %}
+
+{% block conteudo %}
+<h3>{% if object %}Editar Especialidade{% else %}Nova Especialidade{% endif %}</h3>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Salvar</button>
+    <a href="{% url 'especialidade_list' %}"><button type="button">Cancelar</button></a>
+</form>
+{% endblock %}

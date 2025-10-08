@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Excluir Especialidade{% endblock %}
+
+{% block conteudo %}
+<h3>Confirmar Exclusão</h3>
+
+<p>Tem certeza que deseja excluir a especialidade <strong>{{ object.nome }}</strong>?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirmar</button>
+    <a href="{% url 'especialidade_list' %}"><button type="button">Cancelar</button></a>
+</form>
+{% endblock %}
